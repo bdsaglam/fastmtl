@@ -1,11 +1,10 @@
 {
   "fastmtl": {
     "Overview": "/",
-    "Loss": "loss.html",
-    "Metric": "metric.html",
-    "Multi-task learning with fastai": "tutorial.vqa.html"
+    "Loss": "/loss",
+    "Metric": "/metric"
   },
   "Tutorials": {
-    "Overview": "tutorial.vqa.html"
+    "Overview": "/tutorial.vqa"
   }
 }

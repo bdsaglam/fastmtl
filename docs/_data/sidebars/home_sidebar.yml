@@ -11,14 +11,17 @@ entries:
       url: /
     - output: web,pdf
       title: Loss
-      url: loss.html
+      url: /loss
     - output: web,pdf
       title: Metric
-      url: metric.html
-    - output: web,pdf
-      title: Multi-task learning with fastai
-      url: tutorial.vqa.html
+      url: /metric
     output: web
     title: fastmtl
+  - folderitems:
+    - output: web,pdf
+      title: Overview
+      url: /tutorial.vqa
+    output: web
+    title: Tutorials
   output: web
   title: Sidebar
