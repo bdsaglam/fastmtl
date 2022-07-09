@@ -13,7 +13,7 @@ entries:
       title: module name here
       url: core.html
     - output: web,pdf
-      title: Loss function
+      title: Loss
       url: loss.html
     output: web
     title: fastmtl

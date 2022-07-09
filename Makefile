@@ -6,7 +6,7 @@ all: build docs
 
 build: $(SRC)
 	nbdev_build_lib
-	touch vqa
+	touch fastmtl
 
 sync:
 	nbdev_update_lib
