@@ -1,0 +1,12 @@
+name: fastmtl
+channels:
+- fastai
+- pytorch
+- defaults
+dependencies:
+- fastai==2.6.3
+- nbdev
+- pip
+- pip:
+  - black
+  - flake8
