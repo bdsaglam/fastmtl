@@ -2,6 +2,7 @@
   "fastmtl": {
     "Overview": "/",
     "module name here": "core.html",
-    "Loss": "loss.html"
+    "Loss": "loss.html",
+    "Metric": "metric.html"
   }
 }
