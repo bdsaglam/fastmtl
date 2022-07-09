@@ -15,6 +15,9 @@ entries:
     - output: web,pdf
       title: Metric
       url: metric.html
+    - output: web,pdf
+      title: Multi-task learning with fastai
+      url: tutorial.vqa.html
     output: web
     title: fastmtl
   output: web
