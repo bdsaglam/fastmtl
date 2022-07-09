@@ -40,39 +40,7 @@ nb_path: "nbs/02_metric.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="route_to_metric" class="doc_header"><code>route_to_metric</code><a href="https://github.com/bdsaglam/fastmtl/tree/{branch}/fastmtl/metric.py#L79" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>route_to_metric</code>(<strong><code>idx</code></strong>, <strong><code>metric</code></strong>)</p>
-</blockquote>
-<p>Routes model output at idx to metric</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="RoutedAccumMetric" class="doc_header"><code>class</code> <code>RoutedAccumMetric</code><a href="https://github.com/bdsaglam/fastmtl/tree/{branch}/fastmtl/metric.py#L51" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>RoutedAccumMetric</code>(<strong><code>idx</code></strong>, <strong><code>metric</code></strong>) :: <code>AccumMetric</code></p>
+<h2 id="RoutedAccumMetric" class="doc_header"><code>class</code> <code>RoutedAccumMetric</code><a href="https://github.com/bdsaglam/fastmtl/tree/{branch}/fastmtl/metric.py#L20" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>RoutedAccumMetric</code>(<strong><code>idx</code></strong>, <strong><code>metric</code></strong>) :: <code>AccumMetric</code></p>
 </blockquote>
 <p>Stores predictions and targets on CPU in accumulate to perform final calculations with <code>func</code>.</p>
 
@@ -90,24 +58,6 @@ nb_path: "nbs/02_metric.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="route_to_metric" class="doc_header"><code>route_to_metric</code><a href="__main__.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>route_to_metric</code>(<strong><code>idx</code></strong>, <strong><code>metric</code></strong>)</p>
-</blockquote>
-<p>Routes model output at idx to metric</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -122,9 +72,9 @@ nb_path: "nbs/02_metric.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mtl_metrics" class="doc_header"><code>mtl_metrics</code><a href="https://github.com/bdsaglam/fastmtl/tree/{branch}/fastmtl/metric.py#L91" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mtl_metrics</code>(<strong><code>metrics_list</code></strong>)</p>
+<h4 id="route_to_metric" class="doc_header"><code>route_to_metric</code><a href="https://github.com/bdsaglam/fastmtl/tree/{branch}/fastmtl/metric.py#L49" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>route_to_metric</code>(<strong><code>idx</code></strong>, <strong><code>metric</code></strong>)</p>
 </blockquote>
-<p>Routes metrics by their indice in the outer list</p>
+<p>Routes model output at idx to metric</p>
 
 </div>
 
@@ -183,6 +133,50 @@ nb_path: "nbs/02_metric.ipynb"
 </div>
     {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="mtl_metrics" class="doc_header"><code>mtl_metrics</code><a href="https://github.com/bdsaglam/fastmtl/tree/{branch}/fastmtl/metric.py#L64" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mtl_metrics</code>(<strong>*<code>metrics_list</code></strong>)</p>
+</blockquote>
+<p>Convenience function to route each prediction to list of metrics by their order.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Example usage for routing the first model prediction to <code>F1Score</code> and <code>accuracy</code>, while routing the second one to <code>R2Score</code>.</p>
+<div class="highlight"><pre><span></span><span class="n">learn</span> <span class="o">=</span> <span class="n">Learner</span><span class="p">(</span><span class="o">...</span>
+    <span class="n">metrics</span> <span class="o">=</span> <span class="n">mtl_metrics</span><span class="p">([</span><span class="n">F1Score</span><span class="p">(</span><span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">),</span> <span class="n">accuracy</span><span class="p">],</span> <span class="p">[</span><span class="n">R2Score</span><span class="p">])</span>
+
+<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
 </div>
  
 
