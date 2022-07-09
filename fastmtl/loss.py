@@ -8,7 +8,9 @@ from fastai.basics import *
 # Cell
 
 class CombinedLoss():
-    """Applies loss functions to multiple model outputs and sums them. If applicable, it can decode and compute activations for each model output."""
+    """Applies loss functions to multiple model outputs and sums them.
+    If applicable, it can decode and compute activations for each model output."""
+
     def __init__(self, *loss_funcs, weight=None):
         if weight is None:
             weight = [1.]*len(loss_funcs)
