@@ -18,6 +18,7 @@ class _LearnerProxy(GetAttr):
 
 
 class RoutedAccumMetric(AccumMetric, GetAttr):
+    "AccumMetric with predictions and targets for a specific model head."
     _default = 'metric'
     def __init__(self, idx, metric):
         self.idx = idx
