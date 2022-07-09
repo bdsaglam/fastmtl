@@ -2,9 +2,9 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {}
+index = {"CombinedLoss": "01_loss.ipynb"}
 
-modules = []
+modules = ["loss.py"]
 
 doc_url = "https://bdsaglam.github.io/fastmtl/"
 
