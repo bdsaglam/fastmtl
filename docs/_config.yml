@@ -7,7 +7,7 @@ description: Multi-task learning utilities for fastai
 # Set to false to disable KaTeX math
 use_math: true
 # Add Google analytics id if you have one and want to use it here
-google_analytics:
+google_analytics: G-0NVNHG7XHV
 # See http://nbdev.fast.ai/search for help with adding Search
 google_search:
 
