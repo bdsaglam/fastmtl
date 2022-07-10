@@ -37,7 +37,7 @@ reg_r2.name = 'reg_r2'
 metrics = mtl_metrics([clf_f1_macro, clf_f1_micro], [reg_r2])
 
 learn = Learner(
-    loss_func=loss_func,
+    ...
     metrics=metrics,
 )
 ```
