@@ -45,3 +45,7 @@ learn = Learner(
 ## Tutorials
 
 [Video distortion detection](https://bdsaglam.github.io/fastmtl/tutorial.vqa)
+
+## TODO
+- [ ] Support tabular learner
+- [ ] Support fastai>=2.7
