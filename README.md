@@ -41,3 +41,7 @@ learn = Learner(
     metrics=metrics,
 )
 ```
+
+## Tutorials
+
+[Video distortion detection](https://bdsaglam.github.io/fastmtl/tutorial.vqa)
