@@ -12,6 +12,6 @@ modules = ["loss.py",
 
 doc_url = "https://bdsaglam.github.io/fastmtl/"
 
-git_url = "https://github.com/bdsaglam/fastmtl/tree/{branch}/"
+git_url = "https://github.com/bdsaglam/fastmtl/tree/master/"
 
 def custom_doc_links(name): return None
