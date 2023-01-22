@@ -2,7 +2,8 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"CombinedLoss": "01_loss.ipynb",
+index = {"LossRouting": "01_loss.ipynb",
+         "CombinedLoss": "01_loss.ipynb",
          "RoutedAccumMetric": "02_metric.ipynb",
          "route_to_metric": "02_metric.ipynb",
          "mtl_metrics": "02_metric.ipynb"}

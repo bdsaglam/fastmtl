@@ -47,7 +47,32 @@ nb_path: "nbs/01_loss.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="CombinedLoss" class="doc_header"><code>class</code> <code>CombinedLoss</code><a href="https://github.com/bdsaglam/fastmtl/tree/master/fastmtl/loss.py#L10" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>CombinedLoss</code>(<strong>*<code>loss_funcs</code></strong>, <strong><code>weight</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="LossRouting" class="doc_header"><code>class</code> <code>LossRouting</code><a href="https://github.com/bdsaglam/fastmtl/tree/master/fastmtl/loss.py#L13" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>LossRouting</code>(<strong><code>loss_func</code></strong>:<code>typing.Callable</code>, <strong><code>pred_idx</code></strong>:<code>int</code>, <strong><code>target_idx</code></strong>:<code>int</code>, <strong><code>weight</code></strong>:<code>float</code>=<em><code>1.0</code></em>)</p>
+</blockquote>
+<p>LossRouting(loss_func: Callable, pred_idx: int, target_idx: int, weight: float = 1.0)</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="CombinedLoss" class="doc_header"><code>class</code> <code>CombinedLoss</code><a href="https://github.com/bdsaglam/fastmtl/tree/master/fastmtl/loss.py#L20" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>CombinedLoss</code>(<strong>*<code>loss_routings</code></strong>)</p>
 </blockquote>
 <p>Applies loss functions to multiple model outputs and sums them.
 If applicable, it can decode and compute activations for each model output.</p>
@@ -92,7 +117,7 @@ If applicable, it can decode and compute activations for each model output.</p>
 
 <span class="n">ce</span> <span class="o">=</span> <span class="n">CrossEntropyLossFlat</span><span class="p">()</span>
 <span class="n">bce</span> <span class="o">=</span> <span class="n">BCEWithLogitsLossFlat</span><span class="p">()</span>
-<span class="n">comb_loss</span> <span class="o">=</span> <span class="n">CombinedLoss</span><span class="p">(</span><span class="n">ce</span><span class="p">,</span> <span class="n">bce</span><span class="p">)</span>
+<span class="n">comb_loss</span> <span class="o">=</span> <span class="n">CombinedLoss</span><span class="o">.</span><span class="n">from_one_to_one_routing</span><span class="p">(</span><span class="n">ce</span><span class="p">,</span> <span class="n">bce</span><span class="p">)</span>
 
 <span class="n">bs</span> <span class="o">=</span> <span class="mi">8</span>
 <span class="n">target1</span><span class="p">,</span> <span class="n">output1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="n">bs</span><span class="p">,)),</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="c1"># 5 classes</span>
@@ -153,16 +178,15 @@ If applicable, it can decode and compute activations for each model output.</p>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[tensor([[-0.0704,  0.3978, -0.0734, -0.0817,  0.5799],
-         [ 0.5904, -0.2582,  0.2694, -0.2678, -0.0801],
-         [-0.1434, -0.7269, -0.7748,  1.5109,  0.2760],
-         [-1.3234,  0.1135,  1.8447,  1.3900,  1.1048],
-         [-0.4743,  0.3586,  0.6237,  0.0995, -1.7103],
-         [-1.0282, -0.1217,  1.4803, -2.6635,  0.1207],
-         [-1.0878, -0.1865, -0.5548, -1.6343,  0.2949],
-         [ 0.8009,  1.0363,  0.1929,  0.3628, -0.1960]]),
- tensor([ -1.9926, -11.5465, -14.1181,  10.7254,  -3.6243,   8.0234,  -6.7252,
-          28.0304])]</pre>
+<pre>[tensor([[ 9.6559e-01,  1.2909e+00, -2.0418e-01, -9.8991e-02,  5.9807e-01],
+         [-6.1768e-01, -8.8121e-01, -9.5900e-03, -1.4741e+00, -5.2530e-01],
+         [ 9.5259e-01,  1.2350e+00, -5.7586e-01, -6.4723e-02, -8.5460e-01],
+         [ 1.3948e+00,  6.7017e-01,  2.4812e+00, -2.3243e+00,  4.6702e-01],
+         [ 3.4889e-02, -2.5438e-01, -1.0769e+00, -9.6301e-02,  1.1432e+00],
+         [-9.2353e-01, -4.6509e-01,  1.2955e+00,  3.1447e-01, -2.5700e+00],
+         [ 8.2171e-01, -2.3441e-01, -4.7117e-01,  5.1372e-01,  7.5967e-01],
+         [-5.2264e-01,  3.5434e-01,  2.9362e-01,  8.5736e-04, -1.8668e-01]]),
+ tensor([-2.1232, 11.6096, -5.7914, -7.5502,  7.1219, -5.3170,  4.3356, 13.7366])]</pre>
 </div>
 
 </div>
@@ -202,8 +226,8 @@ If applicable, it can decode and compute activations for each model output.</p>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[tensor([4, 0, 3, 2, 2, 2, 4, 1]),
- tensor([False, False, False,  True, False,  True, False,  True])]</pre>
+<pre>[tensor([1, 2, 1, 2, 4, 2, 0, 1]),
+ tensor([False,  True, False, False,  True, False,  True,  True])]</pre>
 </div>
 
 </div>
@@ -243,16 +267,16 @@ If applicable, it can decode and compute activations for each model output.</p>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[tensor([[0.1539, 0.2458, 0.1534, 0.1521, 0.2948],
-         [0.3238, 0.1386, 0.2348, 0.1372, 0.1656],
-         [0.1131, 0.0631, 0.0602, 0.5915, 0.1721],
-         [0.0181, 0.0760, 0.4290, 0.2723, 0.2047],
-         [0.1196, 0.2750, 0.3585, 0.2122, 0.0347],
-         [0.0523, 0.1295, 0.6429, 0.0102, 0.1651],
-         [0.1028, 0.2531, 0.1751, 0.0595, 0.4096],
-         [0.2615, 0.3309, 0.1424, 0.1687, 0.0965]]),
- tensor([1.1998e-01, 9.6696e-06, 7.3891e-07, 9.9998e-01, 2.5975e-02, 9.9967e-01,
-         1.1989e-03, 1.0000e+00])]</pre>
+<pre>[tensor([[0.2679, 0.3710, 0.0832, 0.0924, 0.1855],
+         [0.1951, 0.1499, 0.3583, 0.0828, 0.2139],
+         [0.3259, 0.4322, 0.0707, 0.1178, 0.0535],
+         [0.2054, 0.0995, 0.6088, 0.0050, 0.0812],
+         [0.1671, 0.1251, 0.0550, 0.1466, 0.5062],
+         [0.0648, 0.1026, 0.5965, 0.2236, 0.0125],
+         [0.3033, 0.1055, 0.0832, 0.2229, 0.2851],
+         [0.1142, 0.2746, 0.2584, 0.1928, 0.1599]]),
+ tensor([1.0686e-01, 9.9999e-01, 3.0443e-03, 5.2573e-04, 9.9919e-01, 4.8834e-03,
+         9.8707e-01, 1.0000e+00])]</pre>
 </div>
 
 </div>
