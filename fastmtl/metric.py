@@ -3,27 +3,28 @@
 __all__ = ['RoutedAccumMetric', 'route_to_metric', 'mtl_metrics']
 
 # Cell
-
-from fastcore.basics import GetAttr, store_attr
+from fastcore.basics import GetAttr, store_attr, ifnone
 from types import FunctionType
 from fastai.metrics import Metric, AvgMetric, AccumMetric
 
+# Cell
 
 class _LearnerProxy(GetAttr):
     _default = 'learn'
-    def __init__(self, learn, idx):
+    def __init__(self, learn, pred_idx, target_idx):
         store_attr()
-        self.pred = self.learn.pred[idx]
-        self.y = self.learn.y[idx]
+        self.pred = self.learn.pred[pred_idx]
+        self.y = self.learn.y[target_idx]
 
 
 class RoutedAccumMetric(AccumMetric, GetAttr):
     "AccumMetric with predictions and targets for a specific model head."
     _default = 'metric'
-    def __init__(self, idx, metric):
-        self.idx = idx
+    def __init__(self, metric, pred_idx, target_idx):
         self.metric = metric
         self._name = metric.name
+        self.pred_idx = pred_idx
+        self.target_idx = target_idx
 
     def reset(self):
         "Clear all targs and preds"
@@ -31,11 +32,11 @@ class RoutedAccumMetric(AccumMetric, GetAttr):
 
     def accumulate(self, learn):
         "Store targs and preds from `learn`, using activation function and argmax as appropriate"
-        return self.metric.accumulate(_LearnerProxy(learn, self.idx))
+        return self.metric.accumulate(_LearnerProxy(learn, self.pred_idx, self.target_idx))
 
     def __call__(self, preds, targs):
         "Calculate metric on one batch of data"
-        return self.metric(preds[self.idx], targs[self.idx])
+        return self.metric(preds[self.pred_idx], targs[self.target_idx])
 
     @property
     def name(self):
@@ -45,18 +46,16 @@ class RoutedAccumMetric(AccumMetric, GetAttr):
     def name(self, value):
         self._name = value
 
-# Cell
-
-def route_to_metric(idx, metric):
-    """Routes model output at idx to metric"""
+def route_to_metric(metric, pred_idx, target_idx):
+    """Routes model output at `pred_idx` and target at index `target_idx` to metric"""
     if isinstance(metric, type):
         metric = metric()
     if isinstance(metric, FunctionType):
-        func = lambda preds, *targs, **kwargs: metric(preds[idx], targs[idx], **kwargs)
+        func = lambda preds, *targs, **kwargs: metric(preds[pred_idx], targs[target_idx], **kwargs)
         func.__name__ = metric.__name__
         return AvgMetric(func)
     if isinstance(metric, Metric):
-        return RoutedAccumMetric(idx, metric)
+        return RoutedAccumMetric(metric, pred_idx, target_idx)
     raise ValueError("Unsupported metric type; must be either function or Metric")
 
 
@@ -64,4 +63,4 @@ def route_to_metric(idx, metric):
 
 def mtl_metrics(*metrics_list):
     """Convenience function to route each prediction to list of metrics by their order."""
-    return [route_to_metric(i, m) for i, metrics in enumerate(metrics_list) for m in metrics]
+    return [route_to_metric(m, i, i) for i, metrics in enumerate(metrics_list) for m in metrics]

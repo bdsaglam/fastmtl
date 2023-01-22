@@ -33,6 +33,13 @@ nb_path: "nbs/02_metric.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
 <div class="output_wrapper">
 <div class="output">
 
@@ -40,7 +47,7 @@ nb_path: "nbs/02_metric.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="RoutedAccumMetric" class="doc_header"><code>class</code> <code>RoutedAccumMetric</code><a href="https://github.com/bdsaglam/fastmtl/tree/{branch}/fastmtl/metric.py#L20" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>RoutedAccumMetric</code>(<strong><code>idx</code></strong>, <strong><code>metric</code></strong>) :: <code>AccumMetric</code></p>
+<h2 id="RoutedAccumMetric" class="doc_header"><code>class</code> <code>RoutedAccumMetric</code><a href="https://github.com/bdsaglam/fastmtl/tree/master/fastmtl/metric.py#L20" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>RoutedAccumMetric</code>(<strong><code>metric</code></strong>, <strong><code>pred_idx</code></strong>, <strong><code>target_idx</code></strong>) :: <code>AccumMetric</code></p>
 </blockquote>
 <p>AccumMetric with predictions and targets for a specific model head.</p>
 
@@ -58,13 +65,6 @@ nb_path: "nbs/02_metric.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -72,9 +72,9 @@ nb_path: "nbs/02_metric.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="route_to_metric" class="doc_header"><code>route_to_metric</code><a href="https://github.com/bdsaglam/fastmtl/tree/{branch}/fastmtl/metric.py#L50" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>route_to_metric</code>(<strong><code>idx</code></strong>, <strong><code>metric</code></strong>)</p>
+<h4 id="route_to_metric" class="doc_header"><code>route_to_metric</code><a href="https://github.com/bdsaglam/fastmtl/tree/master/fastmtl/metric.py#L49" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>route_to_metric</code>(<strong><code>metric</code></strong>, <strong><code>pred_idx</code></strong>, <strong><code>target_idx</code></strong>)</p>
 </blockquote>
-<p>Routes model output at idx to metric</p>
+<p>Routes model output at <code>pred_idx</code> and target at index <code>target_idx</code> to metric</p>
 
 </div>
 
@@ -104,7 +104,7 @@ nb_path: "nbs/02_metric.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mtl_metrics" class="doc_header"><code>mtl_metrics</code><a href="https://github.com/bdsaglam/fastmtl/tree/{branch}/fastmtl/metric.py#L65" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mtl_metrics</code>(<strong>*<code>metrics_list</code></strong>)</p>
+<h4 id="mtl_metrics" class="doc_header"><code>mtl_metrics</code><a href="https://github.com/bdsaglam/fastmtl/tree/master/fastmtl/metric.py#L64" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mtl_metrics</code>(<strong>*<code>metrics_list</code></strong>)</p>
 </blockquote>
 <p>Convenience function to route each prediction to list of metrics by their order.</p>
 
